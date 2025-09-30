@@ -1,25 +1,36 @@
 import kotlin.math.*
+/*
+to do: improve drag
+learn why and how the derivatives work
+use kotlin plotly for visualization
+make a gui android app?
+collision detection
+variable gravity
+ */
+
+
 
 class Projectile(
     private val mass: Double,        // kg
     private val velocity: Double,    // m/s (initial velocity)
     private val angleDeg: Double,    // launch angle in degrees
-    private val airResistance: Boolean = false
+    private val airResistance: Double
 ) {
     private val g = 9.8
-    private val angleRad = Math.toRadians(angleDeg)
+    private val angleRad = Math.toRadians(angleDeg) // math functions such as sin and cos expect radians as arguments
 
     // Position functions
-    fun x(t: Double): Double {
-        return velocity * cos(angleRad) * t
+    fun x(t: Double): Double { //horizontal position at time t
+        return velocity * cos(angleRad) * t// learn to implement air resistance
     }
+//constant speed in x (research if true)
 
     fun y(t: Double): Double {
         // Simple version: no air resistance
         var yValue = velocity * sin(angleRad) * t - 0.5 * g * t * t
-
+            // vertical position at time t ; up - down
         if (airResistance) {
-            // Very basic drag: reduce height over time
+            // Very basic drag: reduce height over time research for more accurscy
             val drag = 0.05 * t * velocity / mass
             yValue -= drag
         }
@@ -37,7 +48,7 @@ class Projectile(
 
     fun d2ydt2(): Double = -g // acceleration due to gravity (constant)
 
-    // Flight time (until y=0 again)
+    // Flight time (until y=0 again) total time in air
     fun flightTime(): Double {
         return (2 * velocity * sin(angleRad)) / g
     }
