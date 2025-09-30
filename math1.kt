@@ -1,6 +1,6 @@
 import kotlin.math.*
 /*
-to do: improve drag
+to do: improve drag -- dxdt
 learn why and how the derivatives work
 use kotlin plotly for visualization
 make a gui android app?
@@ -40,13 +40,16 @@ class Projectile(
 
     // Derivatives
     fun dxdt(): Double = velocity * cos(angleRad) // constant horizontal velocity
-
+// change in horizontal motion in respect to time, constant for now but will have change with drag
     fun dydt(t: Double): Double {
         val base = velocity * sin(angleRad) - g * t
         return if (airResistance) base - 0.05 * velocity / mass else base
     }
+    // i think somethings wrong; manuallly solve this tomorrow
 
     fun d2ydt2(): Double = -g // acceleration due to gravity (constant)
+//double check this as well solve on paper tomorrow
+
 
     // Flight time (until y=0 again) total time in air
     fun flightTime(): Double {
@@ -67,6 +70,7 @@ class Projectile(
     fun slopeAt(t: Double): Double {
         return dydt(t) / dxdt()
     }
+    //this needs proofreading too
 }
 
 // ---- Main Demo ----
