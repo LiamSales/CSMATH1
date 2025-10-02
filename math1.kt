@@ -7,7 +7,8 @@ make a gui android app?
 collision detection
 variable gravity
  */
-
+// you know how, now lets discuss WHY
+// high level goal: find an innovative way to implement calculus in code!
 
 
 class Projectile(
@@ -38,7 +39,17 @@ class Projectile(
         return yValue
     }
 
+    //momentum(p) = mass* velocity
+    // we can do p as the y axis, velocity as the x, and mass as the slope
+
+    //kinetic energy is (1/2)mv^2
+
+    //we can do this with a linear graph right? but what if the gradient is curved? thats where calculus comes in
+
     // Derivatives
+
+    //we know that distance is equal to d(t) which is velocity, times the change in time being dt
+    // best graph this on a paper
     fun dxdt(): Double = velocity * cos(angleRad) // constant horizontal velocity
 // change in horizontal motion in respect to time, constant for now but will have change with drag
     fun dydt(t: Double): Double {
@@ -47,9 +58,11 @@ class Projectile(
     }
     // i think somethings wrong; manuallly solve this tomorrow
 
+    //differentiation is the GRADEINT of the curve
+
     fun d2ydt2(): Double = -g // acceleration due to gravity (constant)
 //double check this as well solve on paper tomorrow
-
+//how things change when other things change
 
     // Flight time (until y=0 again) total time in air
     fun flightTime(): Double {
